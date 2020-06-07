@@ -5,6 +5,8 @@ import {Vector as VectorLayer, Tile as TileLayer} from 'ol/layer';
 import {Vector as VectorSource, Stamen} from 'ol/source';
 import Feature from 'ol/Feature';
 import Point from 'ol/geom/Point';
+import Renderer from 'ol/renderer/webgl/PointsLayer';
+import {clamp} from 'ol/math';
 
 const source = new VectorSource();
 
@@ -46,8 +48,11 @@ new Map({
         layer: 'toner'
       })
     }),
-    new VectorLayer({
-      source: source
+    // new VectorLayer({
+    //   source: source
+    // })
+    new CustomLayer({
+      source: source,
     })
   ],
   view: new View({
@@ -55,5 +60,39 @@ new Map({
     zoom: 2
   })
 });
+
+
+//rendering poinsts
+const color = [1, 0, 0, 0.5];
+
+class CustomLayer extends VectorLayer {
+  createRenderer() {
+    return new Renderer(this, {
+      colorCallback: function(feature, vertex, component) {
+        return color[component];
+      },
+      sizeCallback: function(feature) {
+        return 18 * clamp(feature.get('mass') / 200000, 0, 1) + 8;
+      },
+      fragmentShader: `
+        precision mediump float;
+
+        varying vec2 v_texCoord;
+        varying vec4 v_color;
+
+        void main(void) {
+          vec2 texCoord = v_texCoord * 2.0 - vec2(1.0, 1.0);
+          float sqRadius = texCoord.x * texCoord.x + texCoord.y * texCoord.y;
+          float value = 2.0 * (1.0 - sqRadius);
+          float alpha = smoothstep(0.0, 1.0, value);
+
+          gl_FragColor = v_color;
+          gl_FragColor.a *= alpha;
+        }
+      `
+    });
+  }
+}
+
 
 // alert('Hello Workshop');
