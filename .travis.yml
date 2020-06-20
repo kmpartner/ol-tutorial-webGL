@@ -10,7 +10,7 @@ services:
   
 before_install:
   - docker build -t kmpartner/ol-tutorial-webgl .
-  - docker run -d -p 127.0.0.1:80:80 kmpartner/ol-tutorial-webgl
+  - docker run -d -p 127.0.0.1:80:80 kmpartner/ol-tutorial-webgl /bin/sh -c "ls /root"
+#   - docker run -d -p 127.0.0.1:80:4567 carlad/sinatra /bin/sh -c "cd /root/sinatra; bundle exec foreman start;"
   - docker ps -a
-  - docker exec -it kmpartner/ol-tutorial-webgl -c "ls /root"
   
