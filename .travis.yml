@@ -5,11 +5,12 @@ node_js:
 script:
     - npm run build
 
-# services:
-#   - docker
+services:
+  - docker
   
-# before_install:
-#   - docker build -t kmpartner/ol-tutorial-webgl .
-#   - docker run -d -p 127.0.0.1:80:80 kmpartner/ol-tutorial-webgl
-#   - docker ps -a
+before_install:
+  - docker build -t kmpartner/ol-tutorial-webgl .
+  - docker run -d -p 127.0.0.1:80:80 kmpartner/ol-tutorial-webgl
+  - docker ps -a
+  - docker exec -it kmpartner/ol-tutorial-webgl -c "ls /root"
   
