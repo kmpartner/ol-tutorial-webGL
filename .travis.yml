@@ -2,11 +2,14 @@ language: node_js
 node_js:
   - 8
 
+script:
+    - npm run build
+
+services:
+  - docker
+  
 before_install:
-  - npm run build
   - docker build -t kmpartner/ol-tutorial-webgl .
   - docker run -d -p 127.0.0.1:80:80 kmpartner/ol-tutorial-webgl
   - docker ps -a
   
-script:
-    - npm run build
