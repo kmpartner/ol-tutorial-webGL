@@ -9,7 +9,8 @@ after_success:
 - docker build -t kmpartner/ol-tutorial-webgl .
 - docker run -d -p 127.0.0.1:80:80 kmpartner/ol-tutorial-webgl
 - docker ps -a
-- echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+- echo "$DOCKER_USERNAME"
+- echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
 env:
   global:
   - secure: ikcssrNYwtMkv8+lzNzmDLvOjaLX/6MKYzSYP03pfswHH+BNIq3NradnQSdoK9s4AMqEHrbQUmAkuFM9tYYGX7AxNwCQxiafI4S3+y4Woe+P3QDkxZ/D8D5t/KdceNH68N/kwF2BXxJJnX9EGbRv/SR5M5Movo/wLE69uPPs7Dr3E+8/QG8kskOCqk3VZBoP5ZutKvIpwBRHUk9bVFUF/NOOc+2NgY+bYVQGpxoXNKLp0JVN+UThvbW7EHyTvVJ0LGyHbqPfDcfMgRupUj8DcXSaP08VGGXW4rUT0DbvJZ2QHcwurMcnsmP4WlhVLWMNpr7+8R0W/YK8NbipUydpgzaMMTt3NJIbINIQdkCcZDx8QAUgy8VRqxRGQD9p/oKjPoHNaBG3K+eiGDB2ccItsD2s1LudhWxTNTJ6+3kH8DAnlVhUHBYI/f8xI3LVhjtRPQnlXNNXrfnZYkZKt9v/TubppM1GUYhHAsPwQyWhMRHgANQs4fb6xlWMAyC+Uu79MuO6CNnW4sHaIniiQN3PIZg1LZxi0ZB9JNV1POJ6iMb3CfPwKHT82dGkFaTqK35r9cG7XhBUuarZk9tF00o/KWUs3DkJXJADdYgr07otSAllZfhEAZzOZQcjghiBZEmdob+okSOiT1ypbMNFcyBTRpjMy59U+6WNN9bivBiMRbM=
