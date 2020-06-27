@@ -11,6 +11,7 @@ after_success:
 - docker ps -a
 - echo "$DOCKER_USERNAME"
 - echo "$TEST"
+- echo "$duname" | base64 --decode
 - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 env:
   global:
