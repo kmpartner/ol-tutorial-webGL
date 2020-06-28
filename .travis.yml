@@ -9,12 +9,6 @@ after_success:
 - docker build -t kmpartner/ol-tutorial-webgl .
 - docker run -d -p 127.0.0.1:80:80 kmpartner/ol-tutorial-webgl
 - docker ps -a
-- echo "$TEST"
-# - echo "$DOCKER_UNAME" > uname.txt
-# - export DOCKER_USERNAME=$(cat ./uname.txt | base64 --decode)
-# - echo "$DOCKER_PASS" > pass.txt
-# - export DOCKER_PASSWORD=$(cat ./pass.txt | base64 --decode)
-# - echo $DOCKER_USERNAME
 - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 - docker push kmpartner/ol-tutorial-webgl
 env:
