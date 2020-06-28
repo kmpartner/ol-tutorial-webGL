@@ -9,22 +9,17 @@ after_success:
 - docker build -t kmpartner/ol-tutorial-webgl .
 - docker run -d -p 127.0.0.1:80:80 kmpartner/ol-tutorial-webgl
 - docker ps -a
-
 - echo "$TEST"
-
 - echo "$DOCKER_UNAME" > uname.txt
 - export DOCKER_USERNAME=$(cat ./uname.txt | base64 --decode)
-
 - echo "$DOCKER_PASS" > pass.txt
 - export DOCKER_PASSWORD=$(cat ./pass.txt | base64 --decode)
-
 - echo $DOCKER_USERNAME
-
 - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 - docker push kmpartner/ol-tutorial-webgl
-
 env:
   global:
   - TRAVIS_SECURE_ENV_VARS=true
   - TEST=testenv2
   - secure: Zsaw4kDg5R7spdie4tGS6pCUla5Ou7qLKV0FYY20k9jsZtLbnL+GUdPejdXlnNz470Bm1BSKCk0FJhxorTyoEH9415/sQQ9blR6s+3euA5ndJYz3FkzyfsIwcdCtiqZUsu9DUsUOeAKlHNvlDg5RzeYdXK8eunCnoLPcYceTKQhglFIpzvFHOP2hHzFxL30fcuy6gXs6us3dYkvbWN4mcxPd6cHlPb7hSIF3p0AnMLVaxtyFq94XO8ALfsHUHM3VTbRLLDxPxLVJp8BH/cBJEovAeWbWaVQYGzyXKCgXhs/Q05FoFvpmFjDm3Hpvi7iehDlKQpz2qsowd2r/BbQN3H1M1sjR1atQucs7DBSCvgyU9+w8Qr395sZXL+yNS0SalfEcbJIt5KL1r6euFmKUZukuZ4r85lU0swmAFnbyqL3UcziR065jM4dX+RRwFnCheqdLmXs2k0mQcT0/xXOW4Dna1DxHAj5Dqr+UEPYLsfSsDeZm19/li0STdfdhQmltR6cqr41Lyeg0QzdGenloKmULMhkAaUNY+RkjmySBFu3WeH1VOHYAX+0KnnMkQfos21W5TODNmfs4K5qCYcmzL3An208KaFIKnSxh0D6BvgfTQBtyE+O07d9ySGiD+y5zIu0L2z27V7fL3UDmoeyh8MwovBUgsRCXbarxT/5hZeU=
+  - secure: LwD0v5YZ6zxaW49BKsu+6HGYUc24xghtqPfwX/zEoTVAofUKVOXnOU1Bhka1XVCZZrZL63Q1JgNGBLLcwbaqXP++8e0Ay0oTF9WKlahsWsg1OX+xy640931TfBdX2BnKHfxRoiuvwS8HFR+466N2l4XDuMKISDwBmslBCk1Z5LohL9VlXLTb3Uj1fTA/YZv46SYVQrPPXhT1oPhgzYgiUtOhgjJghTF9he/42PpT32Ef90rXE9gSA7QCQPtpZf5lJFo83trhdtlaUsDkVTzLhW2szYfKbtWOicMEeyAfBhP9BM/sPH2V+6OebjFqwVVI6lkrtsHaxB+UyE3Z55zLI3DhLAaxB3ADS1SgfgAHwqCfk/AsmgsCyYdbw/kDtntBtqxL67KOxH4F+BVVJ58QVwJnVS5pyHfobWrQohsdz5jr8JphUwANIBUlM13OomueRE/K8otTKN3vtCMc2Ao7k1+lJNsCIr+fZt2MwyW/xXF3D+QzWNfUg4fOPY1Cd+Pyw3NOQNVIFyHhypUMsPi4F8T+tUedmrgm/XVSSS1dqWwLTDZw5J47fP/WcNXPErqWyZ0oWwm9E1ph2F8bCNOk8bb7B471QTcwRP68hLznVvXARIUNAKcGAtyjEYrHPZ60jZ+oeqn+dG0cWR+u/Ql08G71jWFSyWwahsq6Z/p+9tg=
