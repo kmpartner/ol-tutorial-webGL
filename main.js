@@ -4,6 +4,7 @@ import { Map, View } from 'ol';
 import { Vector as VectorLayer, Tile as TileLayer } from 'ol/layer';
 import { Vector as VectorSource, Stamen } from 'ol/source';
 import Feature from 'ol/Feature';
+import OSMSource from 'ol/source/OSM';
 import Point from 'ol/geom/Point';
 import Renderer from 'ol/renderer/webgl/PointsLayer';
 import { clamp } from 'ol/math';
@@ -43,11 +44,17 @@ client.send();
 const map = new Map({
   target: 'map-container',
   layers: [
+    // new TileLayer({
+    //   source: new Stamen({
+    //     // layer: 'toner' // 'terrain', 'watercolor', 
+    //     layer: 'terrain'
+    //   })
+    // }),
+
     new TileLayer({
-      source: new Stamen({
-        layer: 'toner'
-      })
+      source: new OSMSource()
     }),
+
     // new VectorLayer({
     //   source: source
     // })
@@ -63,7 +70,8 @@ const map = new Map({
 
 
 //rendering poinsts
-const color = [1, 0, 0, 0.5];
+// const color = [1, 0, 0, 0.5];
+const color = [0, 0, 0, 0.3];
 
 class CustomLayer extends VectorLayer {
   createRenderer() {
@@ -138,3 +146,5 @@ function render() {
 render();
 
 // alert('Hello Workshop');
+
+
