@@ -15,7 +15,7 @@ spec:
             containers:
                 - name: example-api
                   imagePullPolicy: Never
-                  image: local/example:$(IMAGE_TAG)
+                  image: local/example:IMAGE_TAG
                   resources:
                       limits:
                           cpu: 50m
