@@ -15,16 +15,18 @@ after_success:
 - echo $(git rev-parse HEAD)
 - echo $IMAGE_TAG
 
-- docker build -t kmpartner/ol-tutorial-webgl .
+# - docker build -t kmpartner/ol-tutorial-webgl .
+- docker build -t kmpartner/ol-tutorial-webgl:$IMAGE_TAG .
 - docker run -d -p 127.0.0.1:80:80 kmpartner/ol-tutorial-webgl
 - docker ps -a
 - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-- docker push kmpartner/ol-tutorial-webgl
+# - docker push kmpartner/ol-tutorial-webgl
+- docker push kmpartner/ol-tutorial-webgl:$IMAGE_TAG
+
 env:
   global:
   - TRAVIS_SECURE_ENV_VARS=true
   - TEST=testenv2
-  - TAG_TEST=$(echo $(git rev-parse HEAD))
   - IMAGE_TAG=$TRAVIS_COMMIT
   - secure: eX8mxDtRsI56i40AttYY6prq1WozjQtbrH3pUZADTpKRHVBN/hGpT0OAqEPjm16znEMuTcDQDC6vubT9ifXlDsX+ce7b+vkSuhYBocXkcXNyy3faHMb7GuEurpyaEzFMw2EPXyat5JpUFxSJDu1s9Gqca/+JGbDMbkBrSlEEYS7tkLCXF8kq7oBUit8+7aI5a+227dsIf5jBzOKNgUvd+WtIiZowIwW29S7IUXH8w++TEBgHfIQT2eKvY/zKdPJvtJGApEoSSDTRsGt2ttRuaVD29Lf2L+zGaWZ33yXxrMLwC4J0DCx/YMpK2lIpiNga5Ej/tsIv0w6UX+5OkoLMHQGVWC8s8rISBylu4vh4R8Y1vqKLXDhmIjRAv20Wz9VbjmcuvPVFJTT2i1XpB9kKVDsYOguZsYnbeLvmftCHTJg7p4IfYKYbiN3R+Y900REL2H0UMLgcVm/dLT1rTTC4W9UiPiKQHP5SDzDCj7tBps1yJUUI6BAJCdzRNlqMg0Ibqc51jjx5d/kJyAKJn1Pev39XLAQLXM0H51Fq/SjdDzrdY8vMh1UXUG65Z0h3m+F+ZHWGZL+BEP8luc6+SiHuvi1DmYr9Zkknwl1nk7yIlL7zStnpf0YAFaJWUYvugrXR0dl9TcbdXGtWXMQcjukfaTOIDIclqUXVAmDet1zEHMM=
   - secure: mLBqn+Jz5gryCikzdI40rCwm3gD5yuyBgLtW5R3Msx4TxwHDbX4aeYoV2n4fLMMYjIztAp9ViDunqFD79SGdGwpu4i8nMoQAcPPoHVT5xgxvWVn1yvzsxD/xVKuIh8gv1KAHVW6ftBwe1w4KaUPssFBlMLi8BSLKX+jWwJustc0EUslqxSyLd1aZa03RkRyTFR5rZPWsrIOU3+l49S8lJ32bw8lwaVSDp6dXNtxDb24FIhw0LxzfeH6yZPMZy6C2daqlY0xG5DtHP17DN/Sz7NuAyX3tyB3zrI7jG1sfhdxnjYzIVPtxszw3pt7BuhcL1rGuuLJEA7P+Q5Im1fxJkk7EIgRM8EfBpix1PtvNF/9sAG45aCBw1438W7Y0X2kQ8QRhXyp1EOVQ/QMjBLuzWuUZvBysp10VvnyfijtfxaQI5sHVQCNJjF9THp0mp+sSKK+hjMNSrzlv+4/QFponH7QbCo8iwgM0tL2Wz20e1CzrB5T0mcwJT95nDtw1Q1WQC9G/HiFlEzD1N6lA3jgr2ihfR9VTm3fw3M7jLKw94CFEV6ezplF20fV/IIwJmPa+PnLlriBnnMBykVsXPiwcuiDSN0zaCmpVfdrm2k9yzN6/6e2sA7ywloKshID2ZTCcMhp8Y9UKTMRbQskfXpuPAdKo5ndPKw17/6DT80tlNM0=
