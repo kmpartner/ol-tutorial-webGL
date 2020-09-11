@@ -21,10 +21,14 @@ jobs:
         docker images
     - name: Deploy to minikube
       run:
-        kubectl apply -f deploy-to-minikube.yaml
+        export IMAGE_TAG=$(git rev-parse HEAD)
+        envsubst < deploy-to-minikube.yaml | kubectl apply -f -
+
     - name: Test service URLs
       run: |
         minikube service list
         minikube service example --url
+        kubectl describe deployment example
+        kubectl get pod
         echo "------------------opening the service------------------"
         curl $(minikube service example --url)
