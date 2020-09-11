@@ -28,5 +28,6 @@ jobs:
       run: |
         minikube service list
         minikube service example --url
+        kubectl describe deployment example
         echo "------------------opening the service------------------"
         curl $(minikube service example --url)
