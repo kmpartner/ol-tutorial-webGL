@@ -15,7 +15,7 @@ spec:
             containers:
                 - name: example-api
                   imagePullPolicy: Never
-                  image: local/example:latest
+                  image: local/example:$(IMAGE_TAG)
                   resources:
                       limits:
                           cpu: 50m
@@ -25,6 +25,12 @@ spec:
                           memory: 10Mi
                   ports:
                       - containerPort: 80
+                  env:
+                    - name: IMAGE_TAG
+                      valueFrom:
+                        configMapKeyRef:
+                          name: image-tag
+                          key: IMAGE_TAG
 ---
 apiVersion: v1
 kind: Service

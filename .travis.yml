@@ -3,7 +3,6 @@ node_js:
 - 8
 script:
 - npm run build
-- echo $TRAVIS_TAG
 services:
 - docker
 after_success:

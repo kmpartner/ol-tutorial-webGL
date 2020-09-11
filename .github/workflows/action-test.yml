@@ -19,6 +19,8 @@ jobs:
         docker build -f ./Dockerfile -t local/example .
         echo -n "verifying images:"
         docker images
+        kubectl create configmap image-tag --from-literal=IMAGE_TAG=$(git rev-parse HEAD)
+        kubectl describe configmap image-tag
     - name: Deploy to minikube
       run:
         kubectl apply -f deploy-to-minikube.yaml
