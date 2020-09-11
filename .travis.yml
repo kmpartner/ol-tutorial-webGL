@@ -6,7 +6,7 @@ script:
 services:
 - docker
 after_success:
-- docker build -t kmpartner/ol-tutorial-webgl .
+- docker build -t kmpartner/ol-tutorial-webgl:"$TRAVIS_TAG" .
 - docker run -d -p 127.0.0.1:80:80 kmpartner/ol-tutorial-webgl
 - docker ps -a
 - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
