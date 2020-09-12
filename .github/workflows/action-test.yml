@@ -25,7 +25,8 @@ jobs:
     - name: Test service URLs
       run: |
         kubectl get pod
-        kubectl wait --for=condition=Ready pod/$(kubectl get pods -o=jsonpath='{range .items[*]}{"\n"}{.metadata.name}' | grep example)
+        export TEST_POD=$(kubectl get pods -o=jsonpath='{range .items[*]}{"\n"}{.metadata.name}' | grep example)
+        kubectl wait --for=condition=Ready pod/$TEST_POD
         kubectl get pod
         minikube service list
         minikube service example --url
