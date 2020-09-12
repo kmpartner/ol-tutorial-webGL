@@ -22,9 +22,11 @@ jobs:
     - name: Deploy to minikube
       run: |
         kubectl apply -f deploy-to-minikube.yaml
-        kubectl get pod -o wide
     - name: Test service URLs
       run: |
+        kubectl get pod
+        kubectl wait --for=condition=Ready pod/$(kubectl get pods -o=jsonpath='{range .items[*]}{"\n"}{.metadata.name}' | grep example)
+        kubectl get pod
         minikube service list
         minikube service example --url
         echo "------------------opening the service------------------"
