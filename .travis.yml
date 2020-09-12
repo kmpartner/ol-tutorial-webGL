@@ -16,8 +16,9 @@ after_success:
 
 # - docker build -t kmpartner/ol-tutorial-webgl .
 - docker build -t kmpartner/ol-tutorial-webgl:$IMAGE_TAG .
-- docker run -d -p 127.0.0.1:80:80 kmpartner/ol-tutorial-webgl
+- docker run -d -p 127.0.0.1:80:80 --rm kmpartner/ol-tutorial-webgl:$IMAGE_TAG
 - docker ps -a
+- curl 127.0.0.1:80
 - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 # - docker push kmpartner/ol-tutorial-webgl
 - docker push kmpartner/ol-tutorial-webgl:$IMAGE_TAG
